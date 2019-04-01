@@ -87,23 +87,24 @@ public class RequestHandler extends Thread {
                 if (!logined) {
                     responseResource(out, "/user/login.html");
                     return;
-                }
+                }else {
 
-                Collection<User> users = DataBase.findAll();
-                StringBuilder sb = new StringBuilder();
-                sb.append("<table border='1'>");
-                for (User user : users) {
-                    sb.append("<tr>");
-                    sb.append("<td>" + user.getUserId() + "</td>");
-                    sb.append("<td>" + user.getName() + "</td>");
-                    sb.append("<td>" + user.getEmail() + "</td>");
-                    sb.append("</tr>");
+                    Collection<User> users = DataBase.findAll();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("<table border='1'>");
+                    for (User user : users) {
+                        sb.append("<tr>");
+                        sb.append("<td>" + user.getUserId() + "</td>");
+                        sb.append("<td>" + user.getName() + "</td>");
+                        sb.append("<td>" + user.getEmail() + "</td>");
+                        sb.append("</tr>");
+                    }
+                    sb.append("</table>");
+                    byte[] body = sb.toString().getBytes();
+                    DataOutputStream dos = new DataOutputStream(out);
+                    response200Header(dos, body.length);
+                    responseBody(dos, body);
                 }
-                sb.append("</table>");
-                byte[] body = sb.toString().getBytes();
-                DataOutputStream dos = new DataOutputStream(out);
-                response200Header(dos, body.length);
-                responseBody(dos, body);
             } else if (url.endsWith(".css")) {
                 responseCssResource(out, url);
             } else {
