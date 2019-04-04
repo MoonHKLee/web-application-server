@@ -33,6 +33,7 @@ public class RequestHandler extends Thread {
             Controller controller = RequestMapping.getController(request.getPath());
             if (controller == null) {
                 String path = getDefaultPath(request.getPath());
+                aaaaaaaaa;
                 response.forward(path);
             } else {
                 controller.service(request, response);
