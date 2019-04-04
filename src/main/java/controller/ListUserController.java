@@ -35,7 +35,7 @@ public class ListUserController extends AbstractController {
     private boolean isLogin(String cookieValue) {
         Map<String, String> cookies = HttpRequestUtils.parseCookies(cookieValue);
         String value = cookies.get("logined");
-        if (value == null) {
+            if (value == null) {
             return false;
         }
         return Boolean.parseBoolean(value);
